@@ -1,13 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 
-import KeyBoard from "../components/keyBoard";
-import DrawKeyboard from "../bkp/drawPianoKeys";
+import KeyBoard from "../components/keyboard/keyBoard";
 
 const Home = () => {
-  useEffect(() => {
-    let canvas = document.getElementById("myCanvas");
-    DrawKeyboard(canvas, []);
-  }, []);
   return <KeyBoard />;
 };
 
