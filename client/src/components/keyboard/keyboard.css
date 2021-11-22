@@ -3,3 +3,16 @@
   stroke: #000000;
   stroke-width: 0.5;
 }
+.white-key-text {
+  fill: black;
+  font-size: 0.2rem;
+}
+.black-key {
+  fill: #000000;
+  stroke: #ffffff;
+  stroke-width: 0.25;
+}
+.black-key-text {
+  fill: white;
+  font-size: 0.2rem;
+}
