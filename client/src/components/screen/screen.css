@@ -1,0 +1,12 @@
+.piano-screen {
+  width: 25%;
+  height: 200px;
+  border: 1px black solid;
+  background-color: green;
+  color: white;
+  margin-left: 15%;
+  margin-right: 25%;
+  text-align: center;
+  font-family: fantasy;
+  font-size: 6em;
+}

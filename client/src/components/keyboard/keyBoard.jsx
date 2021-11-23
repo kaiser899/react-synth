@@ -20,7 +20,7 @@ const KeyBoard = () => {
       if (allNotes[key[0]].keyboardKey === pressedKey.key) return key[0];
     });
     if (result) {
-      setKeyValue(result[0]);
+      produceSound(result[0]);
     }
 
     // if (Object.keys) console.log(keyboardMaps[pressedKey.key]);
@@ -42,6 +42,9 @@ const KeyBoard = () => {
 
   const produceSound = (key) => {
     setKeyValue(key);
+    setTimeout(() => {
+      setKeyValue("");
+    }, 200);
   };
 
   return (
