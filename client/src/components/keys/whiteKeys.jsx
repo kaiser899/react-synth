@@ -5,7 +5,13 @@ const WhiteKeys = ({ allNotes, produceSound }) => {
   let yWhite = 0;
   let widthWhite = 80;
   let heightWhite = 400;
-  return allNotes.map((key, index) => {
+
+  function _onClick(key, index){
+    //salv index 
+    produceSound(key)
+  }
+
+  return <div></div>allNotes.map((key, index) => {
     if (index !== 0) {
       xWhite += widthWhite;
     }
@@ -13,7 +19,7 @@ const WhiteKeys = ({ allNotes, produceSound }) => {
     return (
       <rect
         id={"key-" + key}
-        className="piano-key white-key"
+        className="piano-key white-key "
         data-piano-key={key}
         stroke="#555555"
         fill="#FFFFF7"
@@ -21,7 +27,7 @@ const WhiteKeys = ({ allNotes, produceSound }) => {
         y={yWhite}
         width={widthWhite}
         height={heightWhite}
-        onClick={() => produceSound(key)}
+        onClick={() => _onClick(key, index)}
       ></rect>
     );
   });
