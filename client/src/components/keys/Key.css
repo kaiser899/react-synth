@@ -1,0 +1,15 @@
+.white-key {
+  stroke: #555555;
+  fill: #fffff7;
+}
+.black-key {
+  stroke: #979797;
+  fill: #4b4b4b;
+}
+
+.white-key.pressed {
+  fill: red;
+}
+.black-key.pressed {
+  fill: green;
+}

@@ -1,52 +1,68 @@
-const notes = [
-  { noteName: "C", altName: "", freq: 32.7, keyboardKey: "q", type: "white" },
-  {
-    noteName: "C#",
-    altName: "Db",
-    freq: 34.65,
-    keyboardKey: "2",
-    type: "black",
-    pressed: false,
+const notes = {
+  81: {
+    value: "C",
+    octaveMod: 0,
+    id: "0",
   },
-  { noteName: "D", altName: "", freq: 36.71, keyboardKey: "w", type: "white" },
-  {
-    noteName: "D#",
-    altName: "Eb",
-    freq: 38.89,
-    keyboardKey: "3",
-    type: "black",
-    pressed: false,
+  87: {
+    value: "D",
+    octaveMod: 0,
+    id: "1",
   },
-  { noteName: "E", altName: "", freq: 41.2, keyboardKey: "e", type: "white" },
-  { noteName: "F", altName: "", freq: 43.65, keyboardKey: "r", type: "white" },
-  { noteName: "F#", altName: "", freq: 46.25, keyboardKey: "5", type: "black" },
-  { noteName: "G", altName: "", freq: 49.0, keyboardKey: "t", type: "white" },
-  {
-    noteName: "G#",
-    altName: "Ab",
-    freq: 51.91,
-    keyboardKey: "6",
-    type: "black",
-    pressed: false,
+  69: {
+    value: "E",
+    id: "2",
+    octaveMod: 0,
   },
-  { noteName: "A", altname: "", freq: 55.0, keyboardKey: "y", type: "white" },
-  {
-    noteName: "A#",
-    altName: "Bb",
-    freq: 110.1,
-    keyboardKey: "7",
-    type: "black",
-    pressed: false,
+  82: {
+    value: "F",
+    id: "3",
+    octaveMod: 0,
   },
-  { noteName: "B", altName: "", freq: 61.74, keyboardKey: "u", type: "white" },
-  {
-    noteName: "C",
-    altName: "",
-    octave: "2",
-    freq: 65.41,
-    keyboardKey: "i",
-    type: "white",
-    pressed: false,
+  84: {
+    value: "G",
+    octaveMod: 0,
+    id: "4",
   },
-];
+  89: {
+    value: "A",
+    octaveMod: 0,
+    id: "5",
+  },
+  85: {
+    value: "B",
+    octaveMod: 0,
+    id: "6",
+  },
+  73: {
+    value: "C",
+    octaveMod: 1,
+    id: "7",
+  },
+  50: {
+    value: "C#",
+    octaveMod: 0,
+    id: "8",
+  },
+  51: {
+    value: "D#",
+    octaveMod: 0,
+    id: "9",
+  },
+  53: {
+    value: "F#",
+    octaveMod: 0,
+    id: "10",
+  },
+  54: {
+    value: "G#",
+    octaveMod: 0,
+    id: "11",
+  },
+  55: {
+    value: "A#",
+    octaveMod: 0,
+    id: "12",
+  },
+};
 export default notes;

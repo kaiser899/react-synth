@@ -1,16 +1,2 @@
-const keyboardMaps = {
-  q: "C",
-  2: "C#",
-  e: "D",
-  3: "D#",
-  r: "E",
-  t: "F",
-  5: "F#",
-  y: "G",
-  6: "G#",
-  u: "A",
-  7: "A#",
-  i: "B",
-  o: "Cbis",
-};
-export default keyboardMaps;
+const keyMaps = [81, 87, 69, 82, 84, 89, 85, 73, 50, 51, 53, 54, 55];
+export default keyMaps;
