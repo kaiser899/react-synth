@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useReducer, createContext, useContext } from "react";
+import {
+  NotesConsumer,
+  NotesProvider,
+} from "../contexts/notesContext/appContext";
 
 import * as Tone from "tone";
 //import Screen from "../components/screen/screen";
 import KeyBoard from "../components/keyboard/keyBoard";
 import StartButton from "../components/startButton/StartButton";
 import changeAudioContext from "../services/audioContext";
+import { initialNotes, notesReducer } from "../services/notesActions";
 
 const Home = () => {
   const [octave, setOctave] = useState(4);
@@ -14,21 +19,29 @@ const Home = () => {
   changeAudioContext();
   console.log(Tone.getContext());
 
-  const synth = new Tone.PolySynth({
+  const synth = new Tone.PolySynth().toDestination();
+  synth.set({
+    detune: 0,
+    portamento: 0.05,
+    volume: 0,
     oscillator: {
-      type: "amtriangle",
-      harmonicity: 0.5,
-      modulationType: "sawtooth",
+      type: "sine",
+      //harmonicity: 0.5,
+      //modulationType: "sine",
+      partialCount: 0,
+      phase: 0,
     },
     envelope: {
-      attackCurve: "exponential",
-      attack: 0.05,
-      decay: 0.2,
-      sustain: 0.2,
-      release: 1.5,
+      attackCurve: "linear",
+      attack: 0.005,
+      decay: 0.1,
+      decayCurve: "exponential",
+      release: 1,
+      releaseCurve: "exponential",
+      sustain: 0.3,
     },
-    portamento: 0.05,
-  }).toDestination();
+  });
+  console.log(synth);
 
   const handleButtonStart = () => {
     Tone.Transport.start();
@@ -37,10 +50,10 @@ const Home = () => {
   };
 
   const startSound = (note) => {
-    synth.triggerAttackRelease(note, "2n");
+    synth.triggerAttackRelease(note);
   };
   const stopSound = (note) => {
-    synth.triggerRelease();
+    synth.triggerRelease(note);
   };
 
   return (
@@ -50,11 +63,15 @@ const Home = () => {
       ) : (
         <div>
           {/* <Screen /> */}
-          <KeyBoard
-            octave={octave}
-            startSound={startSound}
-            stopSound={stopSound}
-          ></KeyBoard>
+          <NotesProvider>
+            <div>
+              <KeyBoard
+                octave={octave}
+                startSound={startSound}
+                stopSound={stopSound}
+              ></KeyBoard>
+            </div>
+          </NotesProvider>
         </div>
       )}
       {/* <SoundGenerator /> */}

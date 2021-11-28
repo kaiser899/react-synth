@@ -1,22 +1,16 @@
 import React, { useRef } from "react";
+import { NotesConsumer } from "../../contexts/notesContext/appContext";
+
 import "../keys/Key.css";
 
-const Key = ({
-  type,
-  value,
-  octave,
-  id,
-  x,
-  width,
-  height,
-  pressed,
-  handleClick,
-}) => {
+const Key = ({ type, value, octave, id, x, width, height, handleClick }) => {
   let classes = type;
-  useRef(() => {}, [pressed]);
-  if (pressed) {
-    classes += " pressed";
-  }
+
+  // const pressed = useContext(NotesContext);
+  useRef(() => {
+    console.log("rendered" + value + octave);
+  }, []);
+
   return (
     <rect
       id={"key-" + value + octave}
