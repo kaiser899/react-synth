@@ -1,60 +1,30 @@
-import React, { useState, useReducer, createContext, useContext } from "react";
-import {
-  NotesConsumer,
-  NotesProvider,
-} from "../contexts/notesContext/appContext";
-
+import React, { useState } from "react";
+import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
+import "react-piano/dist/styles.css";
 import * as Tone from "tone";
-//import Screen from "../components/screen/screen";
-import KeyBoard from "../components/keyboard/keyBoard";
-import StartButton from "../components/startButton/StartButton";
 import changeAudioContext from "../services/audioContext";
-import { initialNotes, notesReducer } from "../services/notesActions";
+import StartButton from "../components/startButton/startButton";
 
 const Home = () => {
-  const [octave, setOctave] = useState(4);
   const [started, setStarted] = useState(0);
-
-  //setting the audio context to playback, for prioritizing sustained playback
-  changeAudioContext();
-  console.log(Tone.getContext());
-
-  const synth = new Tone.PolySynth().toDestination();
-  synth.set({
-    detune: 0,
-    portamento: 0.05,
-    volume: 0,
-    oscillator: {
-      type: "sine",
-      //harmonicity: 0.5,
-      //modulationType: "sine",
-      partialCount: 0,
-      phase: 0,
-    },
-    envelope: {
-      attackCurve: "linear",
-      attack: 0.005,
-      decay: 0.1,
-      decayCurve: "exponential",
-      release: 1,
-      releaseCurve: "exponential",
-      sustain: 0.3,
-    },
-  });
-  console.log(synth);
 
   const handleButtonStart = () => {
     Tone.Transport.start();
     setStarted(1);
     console.log(Tone.Transport.state);
+    //setting the audio context to playback, for prioritizing sustained playback
+    changeAudioContext();
+    console.log(Tone.getContext());
   };
 
-  const startSound = (note) => {
-    synth.triggerAttackRelease(note);
-  };
-  const stopSound = (note) => {
-    synth.triggerRelease(note);
-  };
+  const firstNote = MidiNumbers.fromNote("c3");
+  const lastNote = MidiNumbers.fromNote("f5");
+  const keyboardShortcuts = KeyboardShortcuts.create({
+    firstNote: firstNote,
+    lastNote: lastNote,
+    keyboardConfig: KeyboardShortcuts.HOME_ROW,
+  });
+  const synth = new Tone.PolySynth().toDestination();
 
   return (
     <div>
@@ -62,21 +32,23 @@ const Home = () => {
         <StartButton handleButtonStart={handleButtonStart} />
       ) : (
         <div>
-          {/* <Screen /> */}
-          <NotesProvider>
-            <div>
-              <KeyBoard
-                octave={octave}
-                startSound={startSound}
-                stopSound={stopSound}
-              ></KeyBoard>
-            </div>
-          </NotesProvider>
+          <Piano
+            noteRange={{ first: firstNote, last: lastNote }}
+            playNote={(midiNumber) => {
+              let note = Tone.Frequency(midiNumber, "midi").toNote();
+              synth.triggerAttack(note);
+              // Play a given note - see notes below
+            }}
+            stopNote={(midiNumber) => {
+              // Stop playing a given note - see notes below
+              let note = Tone.Frequency(midiNumber, "midi").toNote();
+              synth.triggerRelease(note);
+            }}
+            width={1000}
+            keyboardShortcuts={keyboardShortcuts}
+          />
         </div>
       )}
-      {/* <SoundGenerator /> */}
-      {/* <VolumeControls />
-      <ToneControls octave={octave} changeOctave={changeOctave} /> */}
     </div>
   );
 };
