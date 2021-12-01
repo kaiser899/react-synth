@@ -2,29 +2,42 @@ import React, { useEffect, useState } from "react";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 import * as Tone from "tone";
-import changeAudioContext from "../services/audioContext";
+import { startAudioContext } from "../services/audioFunctions";
 import StartButton from "../components/startButton/startButton";
-import OctaveSetter from "../components/octaveSetter/octaveSetter";
+import Screen from "../components/screen/screen";
 
 const Home = () => {
   //checking if there are octave user settings in session storage
   let savedStartOctave = sessionStorage.getItem("octave");
-  if (savedStartOctave !== null) savedStartOctave = Number(savedStartOctave);
+  if (savedStartOctave !== null) {
+    savedStartOctave = Number(savedStartOctave);
+  } else {
+    savedStartOctave = 4;
+  }
 
   const [started, setStarted] = useState(0);
-  const [octave, setOctave] = useState(savedStartOctave || 4); // TO-DO: fix savedStartOctave = 0 not shown
+  const [octave, setOctave] = useState(savedStartOctave);
+
+  let audioContext = "";
+  let bpmValue = sessionStorage.getItem("bpm");
+  if (bpmValue !== null) {
+    bpmValue = Number(bpmValue);
+  } else {
+    bpmValue = 120;
+  }
 
   useEffect(() => {
     console.log("Start Octave", octave);
   }, [octave]);
 
-  const handleButtonStart = () => {
-    Tone.Transport.start();
-    setStarted(1);
-    console.log(Tone.Transport.state);
+  const handleButtonStart = async () => {
+    await Tone.start();
+
     //setting the audio context to playback, for prioritizing sustained playback
-    changeAudioContext();
-    console.log(Tone.getContext());
+    audioContext = new Tone.Context({ latencyHint: "playback" });
+    //starting the audio context
+    startAudioContext(audioContext);
+    setStarted(1);
   };
 
   const firstNote = MidiNumbers.fromNote("c" + octave);
@@ -54,11 +67,12 @@ const Home = () => {
         <StartButton handleButtonStart={handleButtonStart} />
       ) : (
         <div>
-          <OctaveSetter
-            octave={octave}
-            handleOctaveIncrement={handleOctaveIncrement}
-            handleOctaveDecrement={handleOctaveDecrement}
-          />
+          {/* <Screen
+          // bpmValue={bpmValue}
+          // octave={octave}
+          // handleOctaveIncrement={handleOctaveIncrement}
+          // handleOctaveDecrement={handleOctaveDecrement}
+          /> */}
           <Piano
             noteRange={{ first: firstNote, last: lastNote }}
             playNote={(midiNumber) => {
