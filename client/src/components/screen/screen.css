@@ -16,3 +16,7 @@
   width: 5%;
   height: 5%;
 }
+
+#metronome-grid {
+  display: grid;
+}

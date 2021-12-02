@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+//COMPONENTS
+import MetronomeSVG from "../../mediaComponents/metronomeSVG";
+import PlusButton from "../../mediaComponents/plusButton";
+import MinusButton from "../../mediaComponents/minusButton";
+//BOOTSTRAP
+
+//FUNCTIONS
 import {
   startMetronome,
   stopMetronome,
@@ -6,10 +13,6 @@ import {
   increaseBPMByTen,
   decreaseBPMByTen,
 } from "../../services/audioFunctions";
-
-import MetronomeSVG from "../../mediaComponents/metronomeSVG";
-import PlusButton from "../../mediaComponents/plusButton";
-import MinusButton from "../../mediaComponents/minusButton";
 
 const Metronome = ({ bpm }) => {
   const [bpmValue, setBpmValue] = useState(getBPMValue());
