@@ -19,12 +19,7 @@ const Home = () => {
   const [octave, setOctave] = useState(savedStartOctave);
 
   let audioContext = "";
-  let bpmValue = sessionStorage.getItem("bpm");
-  if (bpmValue !== null) {
-    bpmValue = Number(bpmValue);
-  } else {
-    bpmValue = 120;
-  }
+  
 
   useEffect(() => {
     console.log("Start Octave", octave);
@@ -67,12 +62,11 @@ const Home = () => {
         <StartButton handleButtonStart={handleButtonStart} />
       ) : (
         <div>
-          {/* <Screen
-          // bpmValue={bpmValue}
-          // octave={octave}
-          // handleOctaveIncrement={handleOctaveIncrement}
-          // handleOctaveDecrement={handleOctaveDecrement}
-          /> */}
+          <Screen
+            octave={octave}
+            handleOctaveIncrement={handleOctaveIncrement}
+            handleOctaveDecrement={handleOctaveDecrement}
+          />
           <Piano
             noteRange={{ first: firstNote, last: lastNote }}
             playNote={(midiNumber) => {

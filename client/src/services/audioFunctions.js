@@ -12,7 +12,6 @@ export const startMetronome = () => {
     (time, value) => {
       synth.triggerAttackRelease(value.note, "4n", time);
       synth.set(metronomeSynthSettings);
-      console.log(value.note, " ", time);
     },
     [
       [{ time: "0", note: "800" }],
@@ -37,4 +36,40 @@ export const startAudioContext = async (context) => {
     await context.resume();
     console.log(context.state);
   }
+};
+
+export const getBPMValue = () => {
+  let bpmValue = sessionStorage.getItem("bpm");
+  if (bpmValue !== null) {
+    bpmValue = Number(bpmValue);
+    console.log(bpmValue);
+    Tone.Transport.bpm.value = bpmValue;
+    return bpmValue;
+  } else {
+    return Tone.Transport.bpm.value;
+  }
+};
+
+export const increaseBPMByTen = (currentBPM, isMetronomeOn) => {
+  Tone.Transport.stop();
+  currentBPM += 10;
+  Tone.Transport.bpm.value = currentBPM;
+
+  //start the metronome again if it was running previously
+  isMetronomeOn && Tone.Transport.start();
+
+  //write the new BPM in the session storage
+  sessionStorage.setItem("bpm", currentBPM);
+};
+
+export const decreaseBPMByTen = (currentBPM, isMetronomeOn) => {
+  Tone.Transport.stop();
+  currentBPM -= 10;
+  Tone.Transport.bpm.value = currentBPM;
+
+  //start the metronome again if it was running previously
+  isMetronomeOn && Tone.Transport.start();
+
+  //write the new BPM in the session storage
+  sessionStorage.setItem("bpm", currentBPM);
 };
