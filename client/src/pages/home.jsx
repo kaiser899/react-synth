@@ -7,7 +7,6 @@ import StartButton from "../components/startButton/StartButton";
 import Screen from "../components/screen/screen";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 const Home = () => {
   //checking if there are octave user settings in session storage
