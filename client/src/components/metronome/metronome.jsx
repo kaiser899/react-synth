@@ -70,7 +70,7 @@ const Metronome = ({ bpm }) => {
         </Row>
         <Row>
           <Col>
-            <p>BPM: {bpmValue}</p>
+            <p>{"BPM" + bpmValue}</p>
           </Col>
 
           <Col>
