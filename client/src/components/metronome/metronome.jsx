@@ -5,6 +5,9 @@ import PlusButton from "../../mediaComponents/plusButton";
 import MinusButton from "../../mediaComponents/minusButton";
 //BOOTSTRAP
 
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 //FUNCTIONS
 import {
   startMetronome,
@@ -46,27 +49,48 @@ const Metronome = ({ bpm }) => {
     }
   };
   return (
-    <div>
-      <h3>METRONOME</h3>
-      <MetronomeSVG
-        className={iconClass}
-        handleToggleMetronome={handleToggleMetronome}
-        id={"metronome-icon"}
-      />
-      <div>
-        <p>BPM: {bpmValue}</p>
-        <PlusButton
-          handleOnClick={handleIncrementBPM}
-          className={"modify-buttons"}
-          id={"bpm-increase-button"}
-        />
-        <MinusButton
-          className={"modify-buttons"}
-          id={"bpm-decrease-button"}
-          handleOnClick={handleDecrementBPM}
-        />
-      </div>
-    </div>
+    <Row>
+      <Col>
+        <Row>
+          <Col>
+            <h3>METRONOME</h3>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <MetronomeSVG
+              className={iconClass}
+              handleToggleMetronome={handleToggleMetronome}
+              id={"metronome-icon"}
+            />
+          </Col>
+          <Col></Col>
+          <Col></Col>
+          <Col></Col>
+        </Row>
+        <Row>
+          <Col>
+            <p>BPM: {bpmValue}</p>
+          </Col>
+
+          <Col>
+            <PlusButton
+              handleOnClick={handleIncrementBPM}
+              className={"modify-buttons"}
+              id={"bpm-increase-button"}
+            />
+          </Col>
+          <Col>
+            <MinusButton
+              className={"modify-buttons"}
+              id={"bpm-decrease-button"}
+              handleOnClick={handleDecrementBPM}
+            />
+          </Col>
+          <Col></Col>
+        </Row>
+      </Col>
+    </Row>
   );
 };
 

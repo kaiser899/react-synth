@@ -5,6 +5,9 @@ import * as Tone from "tone";
 import { startAudioContext } from "../services/audioFunctions";
 import StartButton from "../components/startButton/StartButton";
 import Screen from "../components/screen/screen";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Home = () => {
   //checking if there are octave user settings in session storage
@@ -56,34 +59,40 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <Container fluid>
       {!started ? (
-        <StartButton handleButtonStart={handleButtonStart} />
+        <Row>
+          <StartButton handleButtonStart={handleButtonStart} />
+        </Row>
       ) : (
-        <div>
-          <Screen
-            octave={octave}
-            handleOctaveIncrement={handleOctaveIncrement}
-            handleOctaveDecrement={handleOctaveDecrement}
-          />
-          <Piano
-            noteRange={{ first: firstNote, last: lastNote }}
-            playNote={(midiNumber) => {
-              let note = Tone.Frequency(midiNumber, "midi").toNote();
-              synth.triggerAttack(note);
-              // Play a given note - see notes below
-            }}
-            stopNote={(midiNumber) => {
-              // Stop playing a given note - see notes below
-              let note = Tone.Frequency(midiNumber, "midi").toNote();
-              synth.triggerRelease(note);
-            }}
-            width={1000}
-            keyboardShortcuts={keyboardShortcuts}
-          />
-        </div>
+        <Container>
+          <Row className="justify-content-md-center">
+            <Screen
+              octave={octave}
+              handleOctaveIncrement={handleOctaveIncrement}
+              handleOctaveDecrement={handleOctaveDecrement}
+            />
+          </Row>
+          <Row>
+            <Piano
+              noteRange={{ first: firstNote, last: lastNote }}
+              playNote={(midiNumber) => {
+                let note = Tone.Frequency(midiNumber, "midi").toNote();
+                synth.triggerAttack(note);
+                // Play a given note - see notes below
+              }}
+              stopNote={(midiNumber) => {
+                // Stop playing a given note - see notes below
+                let note = Tone.Frequency(midiNumber, "midi").toNote();
+                synth.triggerRelease(note);
+              }}
+              width={1000}
+              keyboardShortcuts={keyboardShortcuts}
+            />
+          </Row>
+        </Container>
       )}
-    </div>
+    </Container>
   );
 };
 

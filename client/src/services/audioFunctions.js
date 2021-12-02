@@ -6,7 +6,7 @@ export const startTone = async () => {
 };
 
 export const startMetronome = () => {
-  const synth = new Tone.FMSynth().toDestination();
+  const synth = new Tone.MembraneSynth().toDestination();
 
   const part = new Tone.Part(
     (time, value) => {
@@ -14,10 +14,10 @@ export const startMetronome = () => {
       synth.set(metronomeSynthSettings);
     },
     [
-      [{ time: "0", note: "800" }],
-      [{ time: "0:1", note: "1600" }],
-      [{ time: "0:2", note: "1600" }],
-      [{ time: "0:3", note: "1600" }],
+      [{ time: "0", note: "C2" }],
+      [{ time: "0:1", note: "E2" }],
+      [{ time: "0:2", note: "E2" }],
+      [{ time: "0:3", note: "E2" }],
     ]
   ).start(0);
   part.loop = true;

@@ -19,5 +19,5 @@ export const metronomeSynthSettings = {
     sustain: 0,
     release: 0.2,
   },
-  volume: "-10",
+  volume: "-20",
 };

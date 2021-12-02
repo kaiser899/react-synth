@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "digital_readout_thick_uprigRg";
+  src: url("../../mediaComponents/fonts/digital_readout_thick_upright.woff2")
+      format("woff2"),
+    url("../../mediaComponents/fonts/digital_readout_thick_upright.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .icon-off {
   fill: gray;
 }
@@ -5,18 +15,23 @@
   fill: black;
 }
 
-.screen {
+/* .screen {
   width: 1000px;
-}
-.modify-buttons {
+} */
+/* .modify-buttons {
   width: 2%;
   height: 2%;
 }
 #metronome-icon {
   width: 5%;
   height: 5%;
-}
+} */
 
 #metronome-grid {
   display: grid;
+}
+
+p,
+h3 {
+  font-family: "digital_readout_thick_uprigRg";
 }
