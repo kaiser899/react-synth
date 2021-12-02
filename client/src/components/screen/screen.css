@@ -1,12 +1,18 @@
-.piano-screen {
-  width: 25%;
-  height: 200px;
-  border: 1px black solid;
-  background-color: green;
-  color: white;
-  margin-left: 15%;
-  margin-right: 25%;
-  text-align: center;
-  font-family: fantasy;
-  font-size: 6em;
+.icon-off {
+  fill: gray;
+}
+.icon-on {
+  fill: black;
+}
+
+.screen {
+  width: 1000px;
+}
+.modify-buttons {
+  width: 2%;
+  height: 2%;
+}
+#metronome-icon {
+  width: 5%;
+  height: 5%;
 }
