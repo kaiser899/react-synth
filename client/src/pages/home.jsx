@@ -3,7 +3,7 @@ import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 import * as Tone from "tone";
 import { startAudioContext } from "../services/audioFunctions";
-import StartButton from "../components/startButton/startButton";
+import StartButton from "../components/startButton/StartButton";
 import Screen from "../components/screen/screen";
 
 const Home = () => {
@@ -19,7 +19,6 @@ const Home = () => {
   const [octave, setOctave] = useState(savedStartOctave);
 
   let audioContext = "";
-  
 
   useEffect(() => {
     console.log("Start Octave", octave);
