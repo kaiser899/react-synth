@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 //COMPONENTS
-import MetronomeSVG from "../../mediaComponents/metronomeSVG";
+import MetronomeToggle from "./metronomeToggle";
 import PlusButton from "../../mediaComponents/plusButton";
 import MinusButton from "../../mediaComponents/minusButton";
-//BOOTSTRAP
 
+//BOOTSTRAP
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -21,7 +21,7 @@ const Metronome = ({ bpm }) => {
   const [bpmValue, setBpmValue] = useState(getBPMValue());
   const [isMetronomeOn, setIsMetronomeOn] = useState(false);
 
-  const iconClass = isMetronomeOn ? "icon-on" : "icon-off";
+  // const iconClass = isMetronomeOn ? "icon-on" : "icon-off";
 
   const handleIncrementBPM = () => {
     if (bpmValue + 10 > 220) {
@@ -40,7 +40,7 @@ const Metronome = ({ bpm }) => {
   };
 
   const handleToggleMetronome = () => {
-    if (iconClass === "icon-on") {
+    if (isMetronomeOn) {
       stopMetronome();
       setIsMetronomeOn(false);
     } else {
@@ -52,42 +52,42 @@ const Metronome = ({ bpm }) => {
     <Row>
       <Col>
         <Row>
-          <Col>
-            <h3>METRONOME</h3>
-          </Col>
+          <h3 class="labels">METRONOME</h3>
         </Row>
         <Row>
-          <Col>
-            <MetronomeSVG
-              className={iconClass}
+          <Col xs={3}>
+            <MetronomeToggle
               handleToggleMetronome={handleToggleMetronome}
-              id={"metronome-icon"}
+              isMetronomeOn={isMetronomeOn}
+              id={"metronome-toggle"}
             />
           </Col>
-          <Col></Col>
-          <Col></Col>
-          <Col></Col>
         </Row>
         <Row>
-          <Col>
-            <p>{"BPM" + bpmValue}</p>
+          <Col xs={4}>
+            <p class="labels">{"BPM " + bpmValue}</p>
           </Col>
-
-          <Col>
-            <PlusButton
-              handleOnClick={handleIncrementBPM}
-              className={"modify-buttons"}
-              id={"bpm-increase-button"}
-            />
+        </Row>
+        <Row className="modifiers-container">
+          <Col xs={6}>
+            <Row>
+              <Col xs={6}>
+                <MinusButton
+                  className={"modify-buttons"}
+                  id={"bpm-decrease-button"}
+                  handleOnClick={handleDecrementBPM}
+                />
+              </Col>
+              <Col xs={6}>
+                <PlusButton
+                  handleOnClick={handleIncrementBPM}
+                  className={"modify-buttons"}
+                  id={"bpm-increase-button"}
+                />
+              </Col>
+              <Col xs={2} />
+            </Row>
           </Col>
-          <Col>
-            <MinusButton
-              className={"modify-buttons"}
-              id={"bpm-decrease-button"}
-              handleOnClick={handleDecrementBPM}
-            />
-          </Col>
-          <Col></Col>
         </Row>
       </Col>
     </Row>

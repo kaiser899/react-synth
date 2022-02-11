@@ -46,6 +46,8 @@ export const getBPMValue = () => {
     Tone.Transport.bpm.value = bpmValue;
     return bpmValue;
   } else {
+    //alert("issue");
+    sessionStorage.setItem("bpm", Tone.Transport.bpm.value);
     return Tone.Transport.bpm.value;
   }
 };

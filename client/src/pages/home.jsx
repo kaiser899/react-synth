@@ -3,10 +3,12 @@ import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 import * as Tone from "tone";
 import { startAudioContext } from "../services/audioFunctions";
-import StartButton from "../components/startButton/StartButton";
 import Screen from "../components/screen/screen";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "./home.css";
+import SplashScreen from "../components/splashScreen/splashScreen";
 
 const Home = () => {
   //checking if there are octave user settings in session storage
@@ -15,6 +17,7 @@ const Home = () => {
     savedStartOctave = Number(savedStartOctave);
   } else {
     savedStartOctave = 4;
+    sessionStorage.setItem("octave", savedStartOctave);
   }
 
   const [started, setStarted] = useState(0);
@@ -42,52 +45,62 @@ const Home = () => {
   const keyboardShortcuts = KeyboardShortcuts.create({
     firstNote: firstNote,
     lastNote: lastNote,
-    keyboardConfig: KeyboardShortcuts.HOME_ROW,
+    keyboardConfig: KeyboardShortcuts.QWERTY_ROW,
   });
   const synth = new Tone.PolySynth().toDestination();
 
   const handleOctaveIncrement = () => {
     if (octave === 7) return;
+    synth.disconnect();
     setOctave((prev) => prev + 1);
     sessionStorage.setItem("octave", octave + 1);
   };
   const handleOctaveDecrement = () => {
     if (octave === 0) return;
+    synth.disconnect();
     setOctave((prev) => prev - 1);
     sessionStorage.setItem("octave", octave - 1);
   };
 
   return (
-    <Container fluid>
+    <Container fluid id="background-main">
       {!started ? (
         <Row>
-          <StartButton handleButtonStart={handleButtonStart} />
+          <SplashScreen handleButtonStart={handleButtonStart} />
         </Row>
       ) : (
-        <Container>
-          <Row className="justify-content-md-center">
-            <Screen
-              octave={octave}
-              handleOctaveIncrement={handleOctaveIncrement}
-              handleOctaveDecrement={handleOctaveDecrement}
-            />
-          </Row>
-          <Row>
-            <Piano
-              noteRange={{ first: firstNote, last: lastNote }}
-              playNote={(midiNumber) => {
-                let note = Tone.Frequency(midiNumber, "midi").toNote();
-                synth.triggerAttack(note);
-                // Play a given note - see notes below
-              }}
-              stopNote={(midiNumber) => {
-                // Stop playing a given note - see notes below
-                let note = Tone.Frequency(midiNumber, "midi").toNote();
-                synth.triggerRelease(note);
-              }}
-              width={1000}
-              keyboardShortcuts={keyboardShortcuts}
-            />
+        <Container id="backdrop">
+          <Row id="app-row">
+            <Col className="wood-case" id="left-case"></Col>
+            <Col id="center-row">
+              <Row className="justify-content-md-center" id="screen-row">
+                <Screen
+                  octave={octave}
+                  handleOctaveIncrement={handleOctaveIncrement}
+                  handleOctaveDecrement={handleOctaveDecrement}
+                />
+              </Row>
+              <Row>
+                <Col id="keyboard">
+                  <Piano
+                    noteRange={{ first: firstNote, last: lastNote }}
+                    playNote={(midiNumber) => {
+                      let note = Tone.Frequency(midiNumber, "midi").toNote();
+                      synth.triggerAttack(note);
+                      // Play a given note - see notes below
+                    }}
+                    stopNote={(midiNumber) => {
+                      // Stop playing a given note - see notes below
+                      let note = Tone.Frequency(midiNumber, "midi").toNote();
+                      synth.triggerRelease(note);
+                    }}
+                    width={1000}
+                    keyboardShortcuts={keyboardShortcuts}
+                  />
+                </Col>
+              </Row>
+            </Col>
+            <Col className="wood-case" id="right-case"></Col>
           </Row>
         </Container>
       )}

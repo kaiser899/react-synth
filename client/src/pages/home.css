@@ -1,0 +1,58 @@
+#backdrop {
+  background-image: url("../mediaComponents/images/bg.jpg");
+  background-size: cover;
+}
+.wood-case {
+  background-image: url("../mediaComponents/images/case.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#left-case {
+  background-position: left top;
+}
+
+#right-case {
+  background-position: right top;
+}
+
+.labels {
+  color: #15ca15;
+}
+
+#metronome-toggle-button {
+  width: 80%;
+}
+
+.modify-buttons {
+  color: #15ca15;
+  width: 50%;
+}
+
+#screen-row {
+  margin-bottom: 2%;
+}
+
+.justify-right {
+  right: 0;
+}
+
+#intro-text {
+  text-transform: uppercase;
+}
+#intro-description p {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: #ffffff;
+  text-align: center;
+}
+
+#background-main {
+  background-image: url("../mediaComponents/images/splash_bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.git-link {
+  color: #15ca15;
+  text-decoration: none;
+}
