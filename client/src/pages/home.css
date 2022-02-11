@@ -36,3 +36,10 @@
 .justify-right {
   right: 0;
 }
+
+#intro-text {
+  text-transform: uppercase;
+}
+#intro-description p {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}

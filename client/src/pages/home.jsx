@@ -3,12 +3,12 @@ import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 import * as Tone from "tone";
 import { startAudioContext } from "../services/audioFunctions";
-import StartButton from "../components/startButton/StartButton";
 import Screen from "../components/screen/screen";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./home.css";
+import SplashScreen from "../components/splashScreen/splashScreen";
 
 const Home = () => {
   //checking if there are octave user settings in session storage
@@ -51,14 +51,13 @@ const Home = () => {
 
   const handleOctaveIncrement = () => {
     if (octave === 7) return;
-    synth.dispose();
-    startAudioContext(audioContext);
+    synth.disconnect();
     setOctave((prev) => prev + 1);
     sessionStorage.setItem("octave", octave + 1);
   };
   const handleOctaveDecrement = () => {
     if (octave === 0) return;
-    synth.dispose();
+    synth.disconnect();
     setOctave((prev) => prev - 1);
     sessionStorage.setItem("octave", octave - 1);
   };
@@ -67,7 +66,7 @@ const Home = () => {
     <Container fluid>
       {!started ? (
         <Row>
-          <StartButton handleButtonStart={handleButtonStart} />
+          <SplashScreen handleButtonStart={handleButtonStart} />
         </Row>
       ) : (
         <Container id="backdrop">
