@@ -42,4 +42,17 @@
 }
 #intro-description p {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: #ffffff;
+  text-align: center;
+}
+
+#background-main {
+  background-image: url("../mediaComponents/images/splash_bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.git-link {
+  color: #15ca15;
+  text-decoration: none;
 }

@@ -17,7 +17,7 @@ const Home = () => {
     savedStartOctave = Number(savedStartOctave);
   } else {
     savedStartOctave = 4;
-    sessionStorage.setItem("octave");
+    sessionStorage.setItem("octave", savedStartOctave);
   }
 
   const [started, setStarted] = useState(0);
@@ -63,7 +63,7 @@ const Home = () => {
   };
 
   return (
-    <Container fluid>
+    <Container fluid id="background-main">
       {!started ? (
         <Row>
           <SplashScreen handleButtonStart={handleButtonStart} />

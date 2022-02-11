@@ -34,7 +34,7 @@ const SplashScreen = ({ handleButtonStart }) => {
           <Col lg={8}>
             <div id="intro-description">
               <p>
-                The KSR-500 series synthetiser, nicknamed{" "}
+                The KSR-500 series synthetizer, nicknamed{" "}
                 <span className="labels">
                   "Forgive Me Father For I Have Synthed"
                 </span>{" "}
@@ -50,6 +50,7 @@ const SplashScreen = ({ handleButtonStart }) => {
                 target={"_blank"}
                 href="https://github.com/kaiser899/react-synth"
                 rel="noreferrer"
+                className="git-link"
               >
                 Click here to see on GitHub
               </a>
