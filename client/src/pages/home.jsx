@@ -17,6 +17,7 @@ const Home = () => {
     savedStartOctave = Number(savedStartOctave);
   } else {
     savedStartOctave = 4;
+    sessionStorage.setItem("octave");
   }
 
   const [started, setStarted] = useState(0);
@@ -44,17 +45,20 @@ const Home = () => {
   const keyboardShortcuts = KeyboardShortcuts.create({
     firstNote: firstNote,
     lastNote: lastNote,
-    keyboardConfig: KeyboardShortcuts.HOME_ROW,
+    keyboardConfig: KeyboardShortcuts.QWERTY_ROW,
   });
   const synth = new Tone.PolySynth().toDestination();
 
   const handleOctaveIncrement = () => {
     if (octave === 7) return;
+    synth.dispose();
+    startAudioContext(audioContext);
     setOctave((prev) => prev + 1);
     sessionStorage.setItem("octave", octave + 1);
   };
   const handleOctaveDecrement = () => {
     if (octave === 0) return;
+    synth.dispose();
     setOctave((prev) => prev - 1);
     sessionStorage.setItem("octave", octave - 1);
   };
@@ -67,10 +71,10 @@ const Home = () => {
         </Row>
       ) : (
         <Container id="backdrop">
-          <Row>
+          <Row id="app-row">
             <Col className="wood-case" id="left-case"></Col>
-            <Col>
-              <Row className="justify-content-md-center">
+            <Col id="center-row">
+              <Row className="justify-content-md-center" id="screen-row">
                 <Screen
                   octave={octave}
                   handleOctaveIncrement={handleOctaveIncrement}
@@ -78,8 +82,7 @@ const Home = () => {
                 />
               </Row>
               <Row>
-                <Col></Col>
-                <Col>
+                <Col id="keyboard">
                   <Piano
                     noteRange={{ first: firstNote, last: lastNote }}
                     playNote={(midiNumber) => {
@@ -96,7 +99,6 @@ const Home = () => {
                     keyboardShortcuts={keyboardShortcuts}
                   />
                 </Col>
-                <Col></Col>
               </Row>
             </Col>
             <Col className="wood-case" id="right-case"></Col>

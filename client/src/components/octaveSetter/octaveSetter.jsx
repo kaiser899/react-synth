@@ -12,42 +12,73 @@ const OctaveSetter = ({
 }) => {
   return (
     <Row>
-      <Row>
-        <Col></Col>
-        <Col></Col>
-        <Col>
-          <h3>OCTAVE</h3>
+      <Row className="justify-content-end">
+        <Col xs={5}>
+          <h3 className="labels">OCTAVE</h3>
         </Col>
       </Row>
-      <Row>
-        <Col></Col>
-        <Col></Col>
-        <Col></Col>
-        <Col></Col>
-        <Col></Col>
-        <Col>
-          <p> {octave}</p>
+      <Row className="justify-content-end">
+        <Col xs={5}>
+          <h3 className="labels">Start: C{octave}</h3>
         </Col>
       </Row>
-      <Row>
-        <Col></Col>
-        <Col></Col>
-        <Col>
-          <PlusButton
-            handleOnClick={handleOctaveIncrement}
-            className={"modify-buttons"}
-            id={"bpm-increase-button"}
-          />
+      <Row className="justify-content-end">
+        <Col xs={5}>
+          <h3 className="labels">End: B{octave + 1}</h3>
         </Col>
-        <Col>
-          <MinusButton
-            className={"modify-buttons"}
-            id={"bpm-decrease-button"}
-            handleOnClick={handleOctaveDecrement}
-          />
+      </Row>
+      <Row className="modifiers-container justify-content-end">
+        <Col xs={6}>
+          <Row>
+            <Col xs={6}>
+              <MinusButton
+                className={"modify-buttons"}
+                id={"octave-decrease-button"}
+                handleOnClick={handleOctaveDecrement}
+              />
+            </Col>
+            <Col xs={6}>
+              <PlusButton
+                handleOnClick={handleOctaveIncrement}
+                className={"modify-buttons"}
+                id={"octave-increase-button"}
+              />
+            </Col>
+            <Col xs={2} />
+          </Row>
         </Col>
       </Row>
     </Row>
+    /* </Row>
+    //   // <Row>
+    //   //   <Col></Col>
+    //   //   <Col></Col>
+    //   //   <Col></Col>
+    //   //   <Col></Col>
+    //   //   <Col></Col>
+    //   //   <Col>
+    //   //     <p> {octave}</p>
+    //   //   </Col>
+    //   // </Row>
+    //   // <Row>
+    //   //   <Col></Col>
+    //   //   <Col></Col>
+    //   //   <Col>
+    //   //     <PlusButton
+    //   //       handleOnClick={handleOctaveIncrement}
+    //   //       className={"modify-buttons"} */
+    //   //       id={"bpm-increase-button"}
+    //   //     />
+    //   //   </Col>
+    //   //   <Col>
+    //   //     <MinusButton
+    //   //       className={"modify-buttons"} */}
+    /* //   //       id={"bpm-decrease-button"}
+    //   //       handleOnClick={handleOctaveDecrement}
+    //   //     />
+    //   //   </Col>
+    //   // </Row> */
+    /* // </Row> */
   );
 };
 

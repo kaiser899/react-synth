@@ -9,15 +9,14 @@ import Col from "react-bootstrap/Col";
 const Screen = ({ octave, handleOctaveDecrement, handleOctaveIncrement }) => {
   return (
     <Row>
-      <Col>
+      <Col id="metronome-container">
         <Metronome
           startMetronome={startMetronome}
           stopMetronome={stopMetronome}
         />
       </Col>
-
       <Col></Col>
-      <Col>
+      <Col id="octave-container">
         <OctaveSetter
           octave={octave}
           handleOctaveIncrement={handleOctaveIncrement}
