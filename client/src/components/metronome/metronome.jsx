@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //COMPONENTS
-import MetronomeSVG from "../../mediaComponents/metronomeSVG";
+import MetronomeToggle from "./metronomeToggle";
 import PlusButton from "../../mediaComponents/plusButton";
 import MinusButton from "../../mediaComponents/minusButton";
 //BOOTSTRAP
@@ -21,7 +21,7 @@ const Metronome = ({ bpm }) => {
   const [bpmValue, setBpmValue] = useState(getBPMValue());
   const [isMetronomeOn, setIsMetronomeOn] = useState(false);
 
-  const iconClass = isMetronomeOn ? "icon-on" : "icon-off";
+  // const iconClass = isMetronomeOn ? "icon-on" : "icon-off";
 
   const handleIncrementBPM = () => {
     if (bpmValue + 10 > 220) {
@@ -40,7 +40,7 @@ const Metronome = ({ bpm }) => {
   };
 
   const handleToggleMetronome = () => {
-    if (iconClass === "icon-on") {
+    if (isMetronomeOn) {
       stopMetronome();
       setIsMetronomeOn(false);
     } else {
@@ -53,16 +53,21 @@ const Metronome = ({ bpm }) => {
       <Col>
         <Row>
           <Col>
-            <h3>METRONOME</h3>
+            <h3 class="labels">METRONOME</h3>
           </Col>
         </Row>
         <Row>
           <Col>
-            <MetronomeSVG
-              className={iconClass}
+            <MetronomeToggle
               handleToggleMetronome={handleToggleMetronome}
-              id={"metronome-icon"}
+              isMetronomeOn={isMetronomeOn}
+              id={"metronome-toggle"}
             />
+            {/* // <MetronomeSVG */}
+            {/* //   className={iconClass}
+            //   handleToggleMetronome={handleToggleMetronome}
+            //   id={"metronome-icon"}
+            // /> */}
           </Col>
           <Col></Col>
           <Col></Col>
@@ -70,7 +75,7 @@ const Metronome = ({ bpm }) => {
         </Row>
         <Row>
           <Col>
-            <p>{"BPM" + bpmValue}</p>
+            <p class="labels">{"BPM" + bpmValue}</p>
           </Col>
 
           <Col>

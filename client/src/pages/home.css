@@ -1,0 +1,25 @@
+#backdrop {
+  background-image: url("../mediaComponents/images/bg.jpg");
+  background-size: cover;
+}
+.wood-case {
+  background-image: url("../mediaComponents/images/case.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#left-case {
+  background-position: left top;
+}
+
+#right-case {
+  background-position: right top;
+}
+
+.labels {
+  color: #15ca15;
+}
+
+#metronome-toggle-button {
+  width: 80%;
+}
