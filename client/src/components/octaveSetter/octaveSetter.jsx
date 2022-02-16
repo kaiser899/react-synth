@@ -49,36 +49,6 @@ const OctaveSetter = ({
         </Col>
       </Row>
     </Row>
-    /* </Row>
-    //   // <Row>
-    //   //   <Col></Col>
-    //   //   <Col></Col>
-    //   //   <Col></Col>
-    //   //   <Col></Col>
-    //   //   <Col></Col>
-    //   //   <Col>
-    //   //     <p> {octave}</p>
-    //   //   </Col>
-    //   // </Row>
-    //   // <Row>
-    //   //   <Col></Col>
-    //   //   <Col></Col>
-    //   //   <Col>
-    //   //     <PlusButton
-    //   //       handleOnClick={handleOctaveIncrement}
-    //   //       className={"modify-buttons"} */
-    //   //       id={"bpm-increase-button"}
-    //   //     />
-    //   //   </Col>
-    //   //   <Col>
-    //   //     <MinusButton
-    //   //       className={"modify-buttons"} */}
-    /* //   //       id={"bpm-decrease-button"}
-    //   //       handleOnClick={handleOctaveDecrement}
-    //   //     />
-    //   //   </Col>
-    //   // </Row> */
-    /* // </Row> */
   );
 };
 

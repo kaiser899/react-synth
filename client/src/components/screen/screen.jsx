@@ -5,8 +5,16 @@ import { startMetronome, stopMetronome } from "../../services/audioFunctions";
 import "./screen.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import OscillatorTypeSetter from "../oscillatorTypeSetter/oscillatorTypeSetter";
 
-const Screen = ({ octave, handleOctaveDecrement, handleOctaveIncrement }) => {
+const Screen = ({
+  octave,
+  handleOctaveDecrement,
+  handleOctaveIncrement,
+  handleOscillatorIncrement,
+  handleOscillatorDecrement,
+  currentOscillatorIndex,
+}) => {
   return (
     <Row>
       <Col id="metronome-container">
@@ -15,7 +23,13 @@ const Screen = ({ octave, handleOctaveDecrement, handleOctaveIncrement }) => {
           stopMetronome={stopMetronome}
         />
       </Col>
-      <Col></Col>
+      <Col>
+        <OscillatorTypeSetter
+          currentOscillatorIndex={currentOscillatorIndex}
+          handleOscillatorIncrement={handleOscillatorIncrement}
+          handleOscillatorDecrement={handleOscillatorDecrement}
+        />
+      </Col>
       <Col id="octave-container">
         <OctaveSetter
           octave={octave}

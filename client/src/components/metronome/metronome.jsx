@@ -52,7 +52,7 @@ const Metronome = ({ bpm }) => {
     <Row>
       <Col>
         <Row>
-          <h3 class="labels">METRONOME</h3>
+          <h3 className="labels">METRONOME</h3>
         </Row>
         <Row>
           <Col xs={3}>
@@ -65,7 +65,7 @@ const Metronome = ({ bpm }) => {
         </Row>
         <Row>
           <Col xs={4}>
-            <p class="labels">{"BPM " + bpmValue}</p>
+            <p className="labels">{"BPM " + bpmValue}</p>
           </Col>
         </Row>
         <Row className="modifiers-container">
