@@ -1,25 +1,24 @@
 import React from "react";
+//elements
+import splashImage from "../../mediaComponents/images/splash.png";
+//Bootstrap
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import splashImage from "../../mediaComponents/images/splash.jpg";
+//CSS
+import "../splashScreen/splashScreen.css";
 
 const SplashScreen = ({ handleButtonStart }) => {
   return (
     <Container fluid>
-      {/* <Row className="justify-content-md-center">
-        <Col lg={6}>
-          <h1 id="intro-text">Welcome to the KSR-500 series synthetiser</h1>
-        </Col>
-      </Row> */}
       <Row className="justify-content-md-center">
-        <Col lg={8}>
-          <img src={splashImage} alt="splash-screen" />
+        <Col md={10}>
+          <img src={splashImage} alt="splash-screen" id="splash-image" />
         </Col>
       </Row>
       <Row className="justify-content-md-center">
         <Row className="justify-content-md-center">
-          <Col lg={1}>
+          <Col md={2}>
             <button
               id={"startButton"}
               onClick={() => {
@@ -31,7 +30,7 @@ const SplashScreen = ({ handleButtonStart }) => {
           </Col>
         </Row>
         <Row className="justify-content-md-center">
-          <Col lg={8}>
+          <Col md={10}>
             <div id="intro-description">
               <p>
                 The KSR-500 series synthetizer, nicknamed{" "}

@@ -10,14 +10,15 @@ import Col from "react-bootstrap/Col";
 
 //FUNCTIONS
 import {
-  startMetronome,
-  stopMetronome,
   getBPMValue,
   increaseBPMByTen,
   decreaseBPMByTen,
 } from "../../services/audioFunctions";
 
-const Metronome = ({ bpm }) => {
+//CSS
+import "../metronome/metronome.css";
+
+const Metronome = ({ startMetronome, stopMetronome }) => {
   const [bpmValue, setBpmValue] = useState(getBPMValue());
   const [isMetronomeOn, setIsMetronomeOn] = useState(false);
 
@@ -49,47 +50,36 @@ const Metronome = ({ bpm }) => {
     }
   };
   return (
-    <Row>
-      <Col>
-        <Row>
-          <h3 className="labels">METRONOME</h3>
-        </Row>
-        <Row>
-          <Col xs={3}>
-            <MetronomeToggle
-              handleToggleMetronome={handleToggleMetronome}
-              isMetronomeOn={isMetronomeOn}
-              id={"metronome-toggle"}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={4}>
-            <p className="labels">{"BPM " + bpmValue}</p>
-          </Col>
-        </Row>
-        <Row className="modifiers-container">
-          <Col xs={6}>
-            <Row>
-              <Col xs={6}>
-                <MinusButton
-                  className={"modify-buttons"}
-                  id={"bpm-decrease-button"}
-                  handleOnClick={handleDecrementBPM}
-                />
-              </Col>
-              <Col xs={6}>
-                <PlusButton
-                  handleOnClick={handleIncrementBPM}
-                  className={"modify-buttons"}
-                  id={"bpm-increase-button"}
-                />
-              </Col>
-              <Col xs={2} />
-            </Row>
-          </Col>
-        </Row>
-      </Col>
+    <Row id="metronome">
+      <Row>
+        <h2 className="labels-gold">METRONOME</h2>
+      </Row>
+      <Row>
+        <Col md={6}>
+          <MetronomeToggle
+            handleToggleMetronome={handleToggleMetronome}
+            isMetronomeOn={isMetronomeOn}
+            id={"metronome-toggle"}
+          />
+        </Col>
+        <Col md={3} className="modifiers-container">
+          <MinusButton
+            className={"modify-buttons"}
+            id={"bpm-decrease-button"}
+            handleOnClick={handleDecrementBPM}
+          />
+        </Col>
+        <Col md={3} className="modifiers-container">
+          <PlusButton
+            handleOnClick={handleIncrementBPM}
+            className={"modify-buttons"}
+            id={"bpm-increase-button"}
+          />
+        </Col>
+      </Row>
+      <Row className="screen-display">
+        <h3 className="labels">{"BPM " + bpmValue}</h3>
+      </Row>
     </Row>
   );
 };

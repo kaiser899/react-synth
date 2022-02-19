@@ -34,7 +34,7 @@ export const stopMetronome = () => {
 export const startAudioContext = async (context) => {
   if (context.state === "suspended") {
     await context.resume();
-    console.log(context.state);
+    //console.log(context.state);
   }
 };
 
@@ -42,7 +42,7 @@ export const getBPMValue = () => {
   let bpmValue = sessionStorage.getItem("bpm");
   if (bpmValue !== null) {
     bpmValue = Number(bpmValue);
-    console.log(bpmValue);
+    //console.log(bpmValue);
     Tone.Transport.bpm.value = bpmValue;
     return bpmValue;
   } else {

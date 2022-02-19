@@ -1,15 +1,19 @@
-import React, { useState } from "react";
-import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
-import "react-piano/dist/styles.css";
+import React, { useState, useEffect } from "react";
+//services
 import * as Tone from "tone";
 import { startAudioContext } from "../services/audioFunctions";
+import { synthSettings } from "../settings/settings";
+//elements
+import SplashScreen from "../components/splashScreen/splashScreen";
+import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
+//Bootstrap
 import Screen from "../components/screen/screen";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+//css
+import "react-piano/dist/styles.css";
 import "./home.css";
-import SplashScreen from "../components/splashScreen/splashScreen";
-import { synthSettings } from "../settings/settings";
 
 const Home = () => {
   //checking if there are octave user settings in session storage
@@ -22,7 +26,8 @@ const Home = () => {
   }
 
   //checking if there are any synth settings saved in session storage
-  let savedSynthSetting = sessionStorage.getItem("synthVersion");
+  let savedSynthSetting = sessionStorage.getItem("synthIndex");
+
   if (savedSynthSetting !== null) {
     savedSynthSetting = Number(savedSynthSetting);
   } else {
@@ -37,10 +42,6 @@ const Home = () => {
 
   let audioContext = "";
 
-  // useEffect(() => {
-  //   console.log("Start Octave", octave);
-  // }, [octave]);
-
   //handler for Start button
 
   const handleButtonStart = async () => {
@@ -53,6 +54,7 @@ const Home = () => {
     setStarted(1);
   };
 
+  //piano constants
   const firstNote = MidiNumbers.fromNote("c" + octave);
   const octaveStop = octave + 2;
   const lastNote = MidiNumbers.fromNote("f" + octaveStop);
@@ -61,9 +63,31 @@ const Home = () => {
     lastNote: lastNote,
     keyboardConfig: KeyboardShortcuts.QWERTY_ROW,
   });
+  let pianoSize;
+  const getSize = () => {
+    if (window.innerWidth > 1400) {
+      pianoSize = 0.67 * window.innerWidth;
+    } else {
+      pianoSize = 0.83 * window.innerWidth;
+    }
+    return {
+      width: window.innerWidth,
+    };
+  };
+  // eslint-disable-next-line no-unused-vars
+  const [windowSize, setWindowSize] = useState(getSize());
+
+  //getting the window size for piano keyboard resize
+  useEffect(() => {
+    const handleResize = () => setWindowSize(getSize());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  //synth
   const synth = new Tone.PolySynth().toDestination();
   synth.set(synthSettings[synthSetting]);
-  console.log(synth);
 
   //handlers for Octave Increment / Decrement
   // TO-DO: Fix issue for note hang during octave change
@@ -79,17 +103,17 @@ const Home = () => {
     setOctave((prev) => prev - 1);
     sessionStorage.setItem("octave", octave - 1);
   };
-
+  //handlers for Oscillator settings increment/decrement
   const handleOscillatorIncrement = () => {
     if (synthSetting === 2) return;
     setSynthSettings((prev) => prev + 1);
-    sessionStorage.setItem("synthIndex", synthSetting);
+    sessionStorage.setItem("synthIndex", synthSetting + 1);
   };
-
   const handleOscillatorDecrement = () => {
+    console.log(synthSetting);
     if (synthSetting === 0) return;
     setSynthSettings((prev) => prev - 1);
-    sessionStorage.setItem("synthIndex", synthSetting);
+    sessionStorage.setItem("synthIndex", synthSetting - 1);
   };
 
   return (
@@ -99,42 +123,47 @@ const Home = () => {
           <SplashScreen handleButtonStart={handleButtonStart} />
         </Row>
       ) : (
-        <Container id="backdrop">
-          <Row id="app-row">
-            <Col className="wood-case" id="left-case"></Col>
-            <Col id="center-row">
-              <Row className="justify-content-md-center" id="screen-row">
-                <Screen
-                  octave={octave}
-                  handleOctaveIncrement={handleOctaveIncrement}
-                  handleOctaveDecrement={handleOctaveDecrement}
-                  handleOscillatorDecrement={handleOscillatorDecrement}
-                  handleOscillatorIncrement={handleOscillatorIncrement}
-                  currentOscillatorIndex={synthSetting}
-                />
-              </Row>
-              <Row>
-                <Col id="keyboard">
-                  <Piano
-                    noteRange={{ first: firstNote, last: lastNote }}
-                    playNote={(midiNumber) => {
-                      let note = Tone.Frequency(midiNumber, "midi").toNote();
-                      synth.triggerAttack(note);
-                      // Play a given note - see notes below
-                    }}
-                    stopNote={(midiNumber) => {
-                      // Stop playing a given note - see notes below
-                      let note = Tone.Frequency(midiNumber, "midi").toNote();
-                      synth.triggerRelease(note);
-                    }}
-                    width={1000}
-                    keyboardShortcuts={keyboardShortcuts}
+        <Container>
+          <Container id="backdrop">
+            <Row id="app-row">
+              <Col className="wood-case" id="left-case" md={1}></Col>
+              <Col id="center-row" md={10}>
+                {/* screen row */}
+                <Row id="logo-row"></Row>
+                <Row className="justify-content-md-center" id="screen-row">
+                  <Screen
+                    octave={octave}
+                    handleOctaveIncrement={handleOctaveIncrement}
+                    handleOctaveDecrement={handleOctaveDecrement}
+                    handleOscillatorDecrement={handleOscillatorDecrement}
+                    handleOscillatorIncrement={handleOscillatorIncrement}
+                    currentOscillatorIndex={synthSetting}
                   />
-                </Col>
-              </Row>
-            </Col>
-            <Col className="wood-case" id="right-case"></Col>
-          </Row>
+                </Row>
+                <Row id="bottom-row"></Row>
+              </Col>
+              <Col className="wood-case" id="right-case" md={1}></Col>
+            </Row>
+          </Container>
+          <Container fluid>
+            <Row>
+              <Piano
+                noteRange={{ first: firstNote, last: lastNote }}
+                playNote={(midiNumber) => {
+                  let note = Tone.Frequency(midiNumber, "midi").toNote();
+                  synth.triggerAttack(note);
+                  // Play a given note - see notes below
+                }}
+                stopNote={(midiNumber) => {
+                  // Stop playing a given note - see notes below
+                  let note = Tone.Frequency(midiNumber, "midi").toNote();
+                  synth.triggerRelease(note);
+                }}
+                width={pianoSize}
+                keyboardShortcuts={keyboardShortcuts}
+              />
+            </Row>
+          </Container>
         </Container>
       )}
     </Container>

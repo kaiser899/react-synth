@@ -1,9 +1,12 @@
 import React from "react";
+//COMPONENTS
 import PlusButton from "../../mediaComponents/plusButton";
 import MinusButton from "../../mediaComponents/minusButton";
-
+//BOOTSTRAP
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+//CSS
+import "../octaveSetter/octaveSetter.css";
 
 const OctaveSetter = ({
   octave,
@@ -11,42 +14,28 @@ const OctaveSetter = ({
   handleOctaveDecrement,
 }) => {
   return (
-    <Row>
-      <Row className="justify-content-end">
-        <Col xs={5}>
-          <h3 className="labels">OCTAVE</h3>
+    <Row id="octave">
+      <Row>
+        <h2 className="labels-gold">OCTAVE</h2>
+      </Row>
+      <Row>
+        <Col md={3} className="modifiers-container">
+          <MinusButton
+            className={"modify-buttons"}
+            id={"octave-decrease-button"}
+            handleOnClick={handleOctaveDecrement}
+          />
+        </Col>
+        <Col md={3} className="modifiers-container">
+          <PlusButton
+            handleOnClick={handleOctaveIncrement}
+            className={"modify-buttons"}
+            id={"octave-increase-button"}
+          />
         </Col>
       </Row>
-      <Row className="justify-content-end">
-        <Col xs={5}>
-          <h3 className="labels">Start: C{octave}</h3>
-        </Col>
-      </Row>
-      <Row className="justify-content-end">
-        <Col xs={5}>
-          <h3 className="labels">End: B{octave + 1}</h3>
-        </Col>
-      </Row>
-      <Row className="modifiers-container justify-content-end">
-        <Col xs={6}>
-          <Row>
-            <Col xs={6}>
-              <MinusButton
-                className={"modify-buttons"}
-                id={"octave-decrease-button"}
-                handleOnClick={handleOctaveDecrement}
-              />
-            </Col>
-            <Col xs={6}>
-              <PlusButton
-                handleOnClick={handleOctaveIncrement}
-                className={"modify-buttons"}
-                id={"octave-increase-button"}
-              />
-            </Col>
-            <Col xs={2} />
-          </Row>
-        </Col>
+      <Row className="screen-display">
+        <h3 className="labels">Start: C{octave}</h3>
       </Row>
     </Row>
   );
