@@ -2,43 +2,45 @@ import React from "react";
 //COMPONENTS
 import PlusButton from "../../mediaComponents/plusButton";
 import MinusButton from "../../mediaComponents/minusButton";
+//import settings
+import { synthNames } from "../../settings/settings";
 //BOOTSTRAP
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-//CSS
-import "../octaveSetter/octaveSetter.css";
 
-const OctaveSetter = ({
-  octave,
-  handleOctaveIncrement,
-  handleOctaveDecrement,
+const OscillatorTypeSetter = ({
+  currentOscillatorIndex,
+  handleOscillatorIncrement,
+  handleOscillatorDecrement,
 }) => {
   return (
-    <Row id="octave">
+    <Row id="oscillator">
       <Row>
-        <h2 className="labels-gold">OCTAVE</h2>
+        <h2 className="labels-gold">OSCILLATOR</h2>
       </Row>
       <Row>
         <Col md={3} className="modifiers-container">
           <MinusButton
             className={"modify-buttons"}
-            id={"octave-decrease-button"}
-            handleOnClick={handleOctaveDecrement}
+            id={"oscillator-index-decrease"}
+            handleOnClick={handleOscillatorDecrement}
           />
         </Col>
         <Col md={3} className="modifiers-container">
           <PlusButton
-            handleOnClick={handleOctaveIncrement}
             className={"modify-buttons"}
-            id={"octave-increase-button"}
+            id={"oscillator-index-increase"}
+            handleOnClick={handleOscillatorIncrement}
           />
         </Col>
       </Row>
       <Row className="screen-display">
-        <h3 className="labels">Start: C{octave}</h3>
+        <Col md={5}>
+          <h3 className="labels">{synthNames[currentOscillatorIndex]}</h3>
+        </Col>
+        <Col md={7} />
       </Row>
     </Row>
   );
 };
-
-export default OctaveSetter;
+export default OscillatorTypeSetter;
