@@ -34,16 +34,14 @@ const SplashScreen = ({ handleButtonStart }) => {
             <div id="intro-description">
               <p>
                 The KSR-500 series synthetizer, nicknamed{" "}
-                <span className="labels">
-                  "Forgive Me Father For I Have Synthed"
-                </span>{" "}
-                is an online simulator meant to test the capabilities of
-                Tone.js, React, and of the creator,{" "}
-                <span className="labels">kaiser899</span>.
+                <span className="labels-splash">"JavaSynth Reactor"</span> is an
+                online simulator meant to test the capabilities of Tone.js,
+                React, and of the creator,{" "}
+                <span className="labels-splash">kaiser899</span>.
               </p>
               <p>
                 The current version offers MVP capabilities, showcasing keyboard
-                control, metronome and octave action.
+                control, metronome, oscillator type and octave settings.
               </p>
               <a
                 target={"_blank"}

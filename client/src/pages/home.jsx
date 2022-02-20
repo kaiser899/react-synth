@@ -6,6 +6,9 @@ import { synthSettings } from "../settings/settings";
 //elements
 import SplashScreen from "../components/splashScreen/splashScreen";
 import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
+//MEDIA COMPONENTS
+import ksrLogo from "../mediaComponents/images/logo.png";
+import tagLine from "../mediaComponents/images/tag.png";
 //Bootstrap
 import Screen from "../components/screen/screen";
 import Container from "react-bootstrap/Container";
@@ -98,7 +101,7 @@ const Home = () => {
     sessionStorage.setItem("octave", octave + 1);
   };
   const handleOctaveDecrement = () => {
-    if (octave === 0) return;
+    if (octave === 0) return; 
     synth.releaseAll();
     setOctave((prev) => prev - 1);
     sessionStorage.setItem("octave", octave - 1);
@@ -106,6 +109,7 @@ const Home = () => {
   //handlers for Oscillator settings increment/decrement
   const handleOscillatorIncrement = () => {
     if (synthSetting === 2) return;
+    //TO DO - change above to length instead of hardcoded
     setSynthSettings((prev) => prev + 1);
     sessionStorage.setItem("synthIndex", synthSetting + 1);
   };
@@ -129,7 +133,19 @@ const Home = () => {
               <Col className="wood-case" id="left-case" md={1}></Col>
               <Col id="center-row" md={10}>
                 {/* screen row */}
-                <Row id="logo-row"></Row>
+                <Row id="logo-row">
+                  <Col md={4}></Col>
+                  <Col md={4}>
+                    <Row>
+                      <img src={ksrLogo} alt="ksr-logo" id="ksr-logo" />;
+                    </Row>
+                    <Row>
+                      <img src={tagLine} alt="tagline" id="tag-line" />;
+                    </Row>
+                  </Col>
+                  <Col md={4}></Col>
+                </Row>
+
                 <Row className="justify-content-md-center" id="screen-row">
                   <Screen
                     octave={octave}
